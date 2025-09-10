@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phantom Link: A Light Novel</title>
+    <style>
+        /* Import Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+
+        /* CSS Variables for a consistent design language */
+        :root {
+            --neon-blue: #00cfff;
+            --soft-pink: #ff77b5;
+            --deep-dark: #0a0f1e;
+            --parchment-color: rgba(255, 255, 255, 0.08);
+            --text-color: #e0e0e0;
+            --glowing-gradient: linear-gradient(90deg, var(--neon-blue) 0%, var(--soft-pink) 100%);
+        }
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            color: var(--text-color);
+            background-color: var(--deep-dark);
+            overflow-x: hidden;
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+        }
+
+        /* Reusable container for content */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Main headings with Orbitron font and neon effect */
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* Reusable glowing button style */
+        .glowing-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .glowing-btn:hover {
+            color: var(--soft-pink);
+            border-color: var(--soft-pink);
+            box-shadow: 0 0 20px var(--soft-pink), inset 0 0 10px var(--soft-pink);
+            transform: scale(1.05);
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: url('Whisk_63474d071f66af185b54b60a2dc6ace6dr.jpg') no-repeat center center/cover;
+            background-attachment: fixed;
+            z-index: 1;
+        }
+
+        /* Parallax effect for the hero background */
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 15, 30, 0.7);
+            z-index: 2;
+        }
+
+        #hero-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        #hero h1 {
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 700;
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px var(--neon-blue), 0 0 30px var(--neon-blue), 0 0 45px var(--neon-blue);
+            animation: pulse-glow 3s infinite alternate;
+            margin-bottom: 0.5rem;
+        }
+
+        #hero p {
+            font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+            color: var(--soft-pink);
+            text-shadow: 0 0 5px var(--soft-pink);
+            margin-bottom: 2rem;
+        }
+
+        @keyframes pulse-glow {
+            from { text-shadow: 0 0 15px var(--neon-blue), 0 0 30px var(--neon-blue); }
+            to { text-shadow: 0 0 25px var(--neon-blue), 0 0 50px var(--neon-blue); }
+        }
+
+        /* --- About Section --- */
+        #about, #disclaimer, #prologue {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .heartbeat-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            background: var(--soft-pink);
+            opacity: 0.1;
+            z-index: 1;
+            animation: heartbeat 2s infinite ease-in-out;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.1; }
+            50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.2; }
+        }
+
+        /* --- Prologue Section --- */
+        #prologue {
+            background: url('Whisk_279929fcb70dabfa8c54f1e43ee0b488dr.jpg') no-repeat center center/cover;
+            background-attachment: fixed;
+            position: relative;
+            min-height: 150vh;
+            padding: 5rem 1rem;
+        }
+
+        /* Dim overlay and PC screen glow */
+        #prologue::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 15, 30, 0.8);
+            z-index: 1;
+        }
+
+        #prologue-panel {
+            position: relative;
+            z-index: 2;
+            background: var(--parchment-color);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            padding: 3rem clamp(2rem, 5vw, 5rem);
+            margin: 0 auto;
+            max-width: 800px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: parchment-glow 4s infinite alternate;
+        }
+
+        .prologue-text p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .prologue-text p.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Special style for the typing animation */
+        .typing-text::after {
+            content: '|';
+            animation: blink-caret 0.75s step-end infinite;
+            font-weight: 700;
+        }
+
+        @keyframes blink-caret {
+            from, to { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes parchment-glow {
+            from { box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); }
+            to { box-shadow: 0 0 25px rgba(255, 255, 255, 0.2); }
+        }
+
+        /* Mobile Legends icon pulse */
+        .ml-icon {
+            display: inline-block;
+            position: relative;
+            font-size: 2rem;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 2rem 0;
+            filter: drop-shadow(0 0 10px var(--soft-pink));
+            animation: pulse-icon 2s infinite ease-in-out;
+        }
+        
+        @keyframes pulse-icon {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+        }
+
+        /* Transition section to "Three Years Later" */
+        #timeline-transition {
+            padding: 10rem 0;
+            text-align: center;
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            text-shadow: 0 0 20px var(--neon-blue);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 2s ease-in;
+            position: relative;
+            z-index: 3;
+            animation: none;
+        }
+
+        #timeline-transition.active {
+            opacity: 1;
+        }
+
+        @keyframes timeline-line {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* --- Footer --- */
+        #main-footer {
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--neon-blue);
+        }
+        
+        .divider {
+            height: 2px;
+            width: 50%;
+            margin: 1rem auto;
+            background: var(--glowing-gradient);
+            box-shadow: 0 0 10px var(--neon-blue), 0 0 10px var(--soft-pink);
+            border-radius: 5px;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            #hero h1 { font-size: 2.5rem; }
+            #hero p { font-size: 0.9rem; }
+            .glass-card { padding: 1.5rem; }
+            #prologue-panel { padding: 2rem 1rem; }
+            .prologue-text p { font-size: 0.9rem; line-height: 1.6; }
+            #timeline-transition { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div id="hero-content">
+            <h1>Phantom Link</h1>
+            <h1>When Two Hearts Connect Beyond the Screen</h1>
+            <p>A Light Novel by ransu-kun</p>
+            <a href="#prologue" class="glowing-btn">Read Now</a>
+        </div>
+    </section>
+
+    <!-- About the Novel (Description Section) -->
+    <section id="about">
+        <div class="container">
+            <div class="heartbeat-bg"></div>
+            <div class="glass-card">
+                <h2 style="margin-bottom: 1rem;">About the Novel</h2>
+                <p>When the pandemic froze the world, Althea found warmth in the laughter of a faceless voice through late-night games. For three years, they shared victories, secrets, and comfort—without ever knowing each other’s faces. Now in San Isidro del Mar, Nueva Esperanza, she’s ready for a new life as a senior high student at Horizon Academy. But fate has a cruel sense of humor: her mysterious confidant might just be sitting one desk away. Will the bond they forged in silence survive the noise of reality?</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Author's Note / Disclaimer Section -->
+    <section id="disclaimer">
+        <div class="container" style="text-align: center; font-size: 0.8rem; opacity: 0.7;">
+            <p><strong>Author’s Note:</strong> Please take note that this story is set in the Philippines, but all names of towns, schools, and characters are purely fictional. Any resemblance to actual persons, living or dead, or to real places is coincidental. Certain locations may be inspired by real towns or provinces, but they are imagined and re-created for narrative purposes by the author.</p>
+        </div>
+    </section>
+
+    <!-- Prologue Section -->
+    <section id="prologue">
+        <div id="prologue-panel">
+            <article class="prologue-text">
+                <h2>Prologue</h2>
+                <p>When the world stopped.</p>
+                <p>The silence was the loudest thing in Quezon City. Not the usual, pre-dawn quiet, but a dead, suffocating silence that had swallowed the entire metro. The ghost of a tricycle’s whine no longer haunted the side streets. The marathon chatter of the neighborhood chismosas had been muted. All that remained was the low, anxious murmur of a news report from the living room downstairs, a sound that had become the official soundtrack to the end of the world, or at least, the end of my world as I knew it.</p>
+                <p>I was fourteen, and this was supposed to be the start of everything. High school. Instead, I was a prisoner in a four-walled cage I called my bedroom, slumped over a desk that had become my entire universe. A graveyard of half-finished notebooks and forgotten doodles surrounded my laptop. My glasses, perpetually smudged, were slipping down my nose. I was swimming in an oversized gray pambahay shirt with a faded cartoon cat on it—my official uniform for the apocalypse.</p>
+                <p>My reflection stared back at me from the dark screen of my monitor. A girl with tired eyes, cheeks still round with baby fat she was supposed to have shed years ago, and hair pulled back in a messy, functional bun. The girl they whispered about in the hallways when they thought she couldn't hear. The girl whose chair they’d “accidentally” kick.</p>
+                <p>So this is it, I thought, the bitterness a familiar taste on my tongue. This is high school now? Just… screens and silence and the ghost of who I was supposed to be?</p>
+                <p>A surge of something hot and restless coiled in my gut. It was a feeling I knew well: a desperate, clawing need to be anywhere but here, anyone but me.</p>
+                <p>My fingers moved on autopilot. A tap on the power button of my PC. The familiar, comforting hum of the fans spinning to life filled the oppressive quiet. While the desktop loaded—a vibrant wallpaper of a neon-drenched Akihabara I’d never seen—my thumb was already swiping across my phone screen. The icons for Valorant and League of Legends on my PC monitor seemed too demanding, too high-stakes. They required a level of commitment I didn't have right now. They were team games, and I wasn't a team player. I was a solo act. A one-woman army.</p>
+                <p>My thumb found its target. The blue icon with the familiar white script. Mobile Legends: Bang Bang.</p>
+                <div class="ml-icon" aria-hidden="true">
+                    <!-- Simple SVG icon for Mobile Legends -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-swords">
+                        <path d="M12.43 14.28a4 4 0 0 1-4.71-4.71m-.34-5.32A10 10 0 0 0 2 13.56l4.63 4.63a9.75 9.75 0 0 0 7.11 3.81c.54 0 1.07-.06 1.6-.17" />
+                        <path d="M20.24 9.17A10 10 0 0 0 10.44 2l-.24.08a2 2 0 0 0-1.25 2.15l.51 2.37a4 4 0 0 1 1.25 2.17" />
+                        <path d="m14.28 12.43 4.63 4.63a9.75 9.75 0 0 0 3.81-7.11c0-.54-.06-1.07-.17-1.6" />
+                        <path d="m5.72 12.43-.51 2.37a2 2 0 0 0 2.15 1.25l2.37-.51a4 4 0 0 1 2.17 1.25" />
+                        <path d="M15.28 15.28a4 4 0 0 1-5.66 0" />
+                    </svg>
+                </div>
+                <p>The splash screen music flooded my room, a soaring, epic orchestral piece that was as much a part of my DNA as my own heartbeat. It was a Pavlovian response. The music played, and Thea—the clumsy, quiet girl in the smudged glasses—began to fade.</p>
+                <p>In her place, another name appeared on the screen, glowing in ethereal font. Nyx.</p>
+                <p>It was a name I’d chosen carefully. Goddess of the night. A primordial being born from Chaos itself. A name that felt like armor, like a promise. Nyx wasn't shy. Nyx wasn't weak. Nyx didn't get pushed around. Nyx was a predator who moved through the digital shadows of the Land of Dawn, a phantom with a 78% win rate.</p>
+                <p>I queued for a ranked match, my role preset to Jungle. My domain. While others fought predictable, boring skirmishes in their lanes, I danced with monsters in the dark, growing stronger in secret, emerging only to strike and disappear.</p>
+                <p>The first match was a blur of calculated violence. I was playing Lancelot, a blur of perfumed steel and phantom-like dashes. My fingers flew across the screen, a dance of muscle memory. First skill through minion wave, second skill to dodge stun, ultimate to secure the kill on their squishy mage, dash back into the safety of the brush. It was poetry. Control. The enemy team, a disorganized mess of strangers, typed “map hack” in the chat. The highest compliment.</p>
+                <p>Victory. The screen flashed blue. MVP.</p>
+                <p>Another game. This time, as the agile assassin Ling, hopping from wall to wall, a veritable god of the battlefield, untouchable. I stole their buffs, ganked their overextended marksman, and single-handedly turned a losing teamfight into a wipeout.</p>
+                <p>Victory. MVP again.</p>
+                <p>The wins were a drug, each one a small hit of validation that soothed the raw, scraped-clean parts of my soul. But after the third straight win, the high began to curdle. The adrenaline faded, and I was left in the quiet of my room again, the glow of the phone illuminating the same face in its reflection.</p>
+                <p>A flash of memory, sharp and ugly. The sting of a basketball thrown “accidentally” at the back of my head in P.E. The sound of snickering as my lunch money was knocked from my hand. The word they loved most, hissed like a curse. Pig.</p>
+                <p>Rage, cold and pure, washed through me.</p>
+                <p>“Okay… one last game,” I muttered to the empty room, my voice raspy. “Then I’m done.”</p>
+                <p>Done with the game for the night. But the word hung in the air, heavier than I intended. I was done with this. This version of me. This pandemic, this lockdown… it was a cage, yes, but a chrysalis, too. A forced retreat where no one could see me. Where I could change. The thought was a spark in the darkness. Tomorrow, I’d clear a space on my floor. I’d find one of those free workout videos on YouTube. I would sweat and ache and suffer in this silence until the girl in the mirror was someone I didn't recognize. Someone strong. Someone more like… Nyx.</p>
+                <p>But first. One last game.</p>
+                <p>I hit ‘Start,’ and the matchmaking wheel spun. A few seconds later, I was in the drafting lobby. The usual chaos ensued. Someone immediately wanted to jungle, my role, but my win rate flashed on screen and they reluctantly switched. Then came the real problem. S5, our last pick, hovered over Layla, the tutorial marksman everyone loves and no one respects. A collective groan went through the team chat.</p>
+                <p>S4: no layla pls</p>
+                <p>S3: srsly? ranked toh</p>
+                <p>S5: trust me guys. im smurf.</p>
+                <p>A lie, probably. Just then, S1, who had been silent, flashed his hero pool. Under the Marksman tab, his Claude had a staggering 82% win rate over 500 matches. A pro. But S5, stubborn and clueless, locked in Layla anyway.</p>
+                <p>A sigh escaped my lips. This was going to be one of those games. A 4v5, basically.</p>
+                <p>S1 didn’t rage. He didn’t flame. He just calmly switched his role to Roam and hovered over his support heroes. A team player. I was already impressed. He finally settled on Atlas, a hulking mech pilot who could suck the entire enemy team into a black hole. A high-risk, high-reward hero.</p>
+                <p>His username was simple, classic. Apollo.</p>
+                <p>The game loaded. Nyx and Apollo. Night and Sun. I almost smirked. A bit on the nose.</p>
+                <p>The match began, and the familiar rhythm took over. I cleared my first buff, my eyes glued to the mini-map. The early game was always a tense chess match. But this time, something was different. Apollo wasn't just roaming; he was predicting.</p>
+                <p>Just as I was about to contest the enemy’s red buff, a move that would leave me vulnerable, a ping appeared on my screen. Retreat. I hesitated for a split second, then obeyed. Not a moment later, three enemy heroes collapsed on the very bush I had been about to enter. A perfect trap. A trap I would have walked right into. My heart hammered against my ribs.</p>
+                <p>Apollo had seen it. He hadn’t even had vision; he’d just read the map, understood the enemy’s rotation, and saved me.</p>
+                <p>A few minutes later, I was farming near the turtle pit, my health a little low. The enemy jungler, a hyper-aggressive Paquito, burst from a nearby bush, fists flying. I was dead. My skills were on cooldown; my dash was a second too late. I braced for the gray screen of death.</p>
+                <p>But then, from the side, a flash of blue and steel. Apollo. He’d used his Flicker spell to close the distance, popping his second skill to slow the Paquito and throwing his own metal body in front of me to absorb the damage. He was the shield. I was the sword. Without a second thought, I turned, my skills now refreshed, and we collapsed on the overextended fighter, securing the kill.</p>
+                <p>My fingers trembled slightly. That synergy… it wasn't normal. It was seamless, unspoken. It felt less like playing with a stranger and more like… a dance with a partner who knew every step.</p>
+                <p>Just as I was recalling to base, a voice crackled through the game’s comms. It wasn’t the usual prepubescent screaming or the staticky rage-speak I was used to. It was a voice, calm and steady, with a low, pleasant tenor that cut through the digital chaos.</p>
+                <p class="dialogue">“Don’t overextend near their jungle without me. I’ve got you.”</p>
+                <p>I physically flinched, my thumb slipping on the screen. He was talking to me. People didn’t use voice chat in solo queue unless it was to curse you out. But his tone wasn't demanding or arrogant. It was an assurance. A fact. I’ve got you. Three words I couldn’t remember anyone ever saying to me, not really.</p>
+                <p>A nervous laugh bubbled up out of my chest, surprising me. I fumbled to turn on my own mic, my throat suddenly dry.</p>
+                <p class="dialogue">“Okay, boss,” I managed to squeak out, my voice an octave higher than usual. I cringed, but he didn't comment.</p>
+                <p>The rest of the game was a masterclass. Every time I dove, he was there to peel their tank off me. Every ultimate I used to initiate, his own ultimate followed, a perfect, wombo-combo chain of crowd control that left the enemy team helpless. We moved as one entity, a shadow and a guardian, Nyx and Apollo, tearing through the Land of Dawn.</p>
+                <p>When the blue Victory screen finally flashed, it was almost a letdown. I wanted it to keep going.</p>
+                <p>Back in the post-match lobby, the stats told the story. I had the most kills, a perfect KDA. But the MVP award went to him. 1 kill, 0 deaths, 22 assists. He hadn't taken a single kill. He’d served them all up to me on a silver platter. He had made me shine.</p>
+                <p>Before I could even process it, a notification popped up. Apollo has sent you a friend request.</p>
+                <p>My cursor—my own finger—hovered over the ‘Accept’ button. This was my sanctuary. I didn’t team up. I didn’t make friends. Friends were a liability. A vulnerability. It was safer to be the lone wolf, the solo carry who needed no one.</p>
+                <p>But his voice echoed in my head. I’ve got you.</p>
+                <p>I pressed Accept.</p>
+                <p>A moment later, an invitation to his party. My heart did a stupid little flip. I accepted that, too.</p>
+                <p>Apollo: nice game.</p>
+                <p>His message appeared in the party chat.</p>
+                <p>Nyx: you too. mvp.</p>
+                <p>Apollo: haha u did all the work. i was just ur glorified bodyguard.</p>
+                <p>Nyx: a very good bodyguard.</p>
+                <p>Apollo: one more? let’s make that layla player regret his life choices.</p>
+                <p>I laughed. A real, genuine laugh that echoed in my silent room. It felt foreign, like a sound from another person’s life.</p>
+                <p>Nyx: deal.</p>
+                <p>The second game was lighter, easier. We were on the same wavelength now. He’d tease me for ‘accidentally’ stealing the last hit on a minion wave with a stray skill shot. I’d fire back, telling him his timing was so perfect it was a little creepy. We joked about other players’ weird item builds, about the cringey in-game chat messages. It was more than just mechanics now. It was a conversation, a rhythm, laughter spilling out between the tense, focused silence of teamfights.</p>
+                <p>We played three more games. We didn't lose a single one.</p>
+                <p>As the final Victory screen faded, I leaned back in my chair, a strange warmth spreading through my chest. The room was still the same. The silence of the lockdown still pressed in from outside. My reflection was still visible on the dark screen. But something had shifted. The loneliness that usually clung to me like a second skin felt… lighter.</p>
+                <p>A flash of memory, sharp and ugly. The sting of a basketball thrown “accidentally” at the back of my head in P.E. The sound of snickering as my lunch money was knocked from my hand. The word they loved most, hissed like a curse. Pig.</p>
+                <p>Rage, cold and pure, washed through me.</p>
+                <p>I was so profoundly done with being this person. I had spent months forging a new identity in a digital world. Why couldn’t I do it in this one?</p>
+                <p>My eyes scanned the cluttered floor of my room and landed on a dusty, rolled-up yoga mat sticking out from under my bed. I hadn't used it since a brief, failed attempt at P.E. homework two years ago.</p>
+                <p>On impulse, I got up, my chair scraping against the floor. I dragged the mat out, unrolling it with a soft thump. It smelled of dust and disuse. My laptop was still open. I typed “beginner workout no equipment” into the YouTube search bar.</p>
+                <p>A thousand thumbnails of impossibly fit, smiling people assaulted my screen. I clicked on the first one that didn't look like it was designed for a super-soldier. A woman with a relentlessly cheerful voice started talking about warming up.</p>
+                <p>I followed along, feeling clumsy and foolish. My body was an alien thing, uncooperative and weak. Then came the actual workout. Push-ups. My arms, used to nothing more strenuous than tapping on a screen, buckled on the second rep. I collapsed onto the mat, my nose inches from the dusty vinyl. Sit-ups. I managed six before my core screamed in protest. Squats. My knees popped, and my thighs felt like they were on fire.</p>
+                <p>Ten minutes. That’s all it was. Ten minutes, and I was a wreck, sprawled on the floor, my chest heaving, sweat stinging my eyes, every muscle in my body trembling with a mixture of agony and exhaustion. I felt pathetic.</p>
+                <p>But as I lay there, listening to the frantic thrumming of my own pulse in my ears, a strange realization dawned. For the first time in months, my heartbeat wasn’t the frantic, shallow rhythm of anxiety. It was the deep, powerful drum of exertion. It was the sound of a body that was alive.</p>
+                <p>And for the first time, in the suffocating silence of my room, that felt like a victory.</p>
+                <p>Our parallel lives began. By day, I was a student staring at a Zoom screen, and then a girl at war with her own body. By night, I was a goddess, laughing with the sun god in our private digital heaven. The two worlds began to bleed into each other, each one fueling the other.</p>
+                <p>Our sessions became a strange, comforting routine. I’d finish my workout, muscles screaming, and collapse into my chair, pulling on my headset just as Apollo logged on. His voice became the reward, the soothing balm after the self-inflicted punishment.</p>
+                <p>From my side of the screen, my world was a montage of quiet suffering and incremental progress. It was the clink of water-filled soda bottles I used as makeshift dumbbells. It was the squeak of my sneakers on the dusty floor as I followed along with a HIIT routine, my lungs burning. It was the metallic taste of exhaustion in my mouth as I held a plank for three seconds longer than the day before. Some days, I’d be so sore that I could barely move, but the thought of his cheerful "Yo, you there?" waiting for me on Discord was enough to make me push through.</p>
+                <p>From his side of the screen, all I got were glimpses, auditory breadcrumbs of his own lockdown life. The rustle of what sounded like textbook pages turning. A muffled yawn followed by the confession that he’d been cramming for an online exam. The distant, tinny sound of a TV news report in the background, a reminder that his world was just as trapped as mine. Sometimes, I’d hear him stifle a chuckle and whisper, "Shh, you'll wake up my sister," and I’d cover my own mouth, mirroring his secrecy, two conspirators whispering in the dead of night. Our separate rooms, miles apart in the sleeping city, felt like two sides of the same coin, tethered together by the fragile thread of our Wi-Fi signals.</p>
+                <p>The months turned into a year, then two. The pandemic timeline became a blurry, surreal dream. The world outside my window slowly, cautiously, began to wake up. But my transformation had been happening all along, in the quiet, stubborn privacy of my own room.</p>
+                <p>The girl in the monitor’s reflection was no longer a stranger I despised. The roundness of my jawline had sharpened into something more defined. My glasses, once a permanent fixture, were replaced by contact lenses that made my eyes seem wider, clearer. My hair, which I’d started to care for, fell past my shoulders in soft waves. The arms that once trembled during a single push-up were now faintly toned, the hint of a bicep where there had only been soft flesh. The oversized pambahay shirts were replaced by workout clothes I wasn't ashamed to wear.</p>
+                <p>The change wasn't just physical. The slow, grueling process of breaking my body down and building it back up, stronger each time, had forged something new inside me. A quiet, resilient confidence. A sense of control.</p>
+                <p>One evening, we were in a Discord call, waiting for a game to load. I was cooling down from a run, a towel draped over my shoulders, my breathing still slightly elevated but steady.</p>
+                <p class="dialogue">"You sound different these days," Apollo said, his voice thoughtful, pulling me from my reverie.</p>
+                <p>I froze. "Different how?"</p>
+                <p class="dialogue">"I don't know," he mused. "More… confident. Like, back when we first started talking, you were super quiet. Now you're the one trash-talking me."</p>
+                <p>A genuine, unforced smirk touched my lips. I looked at my reflection, at the girl with the steady gaze and the sweat-sheened skin. She didn’t look exactly like the ethereal, powerful warrior I imagined Nyx to be, but for the first time, she felt like her. Not a disguise, but an extension. The same person, forged in different fires.</p>
+                <p class="dialogue">"Maybe," I said, my voice clear and even, a perfect match for the girl on the screen. "Maybe Nyx finally caught up to me."</p>
+                <p>Our routine became the bedrock of my existence. Early morning runs where the waking city was my silent audience, earbuds blasting a playlist Apollo and I had built together. Afternoon workouts that left me drained but satisfied. Late-night Discord calls that blended seamlessly from gaming to study sessions to just talking about nothing at all, his laughter a constant, comforting presence echoing in my ears. Our lives, though physically separate, were inextricably threaded together.</p>
+                <p>One night, after a call that lasted until the first hint of dawn was coloring the sky, I finally logged off. I lay in bed, the warmth of our conversation still lingering. I whispered it to the ceiling, a mantra, a truth.</p>
+                <p class="dialogue">"Nyx and Apollo… still undefeated."</p>
+            </article>
+        </div>
+    </section>
+    
+    <!-- Timeline transition -->
+    <div id="timeline-transition">
+        <span>THREE YEARS LATER...</span>
+    </div>
+
+    <section id="prologue-end">
+        <div id="prologue-panel">
+            <article class="prologue-text">
+                <p>The car slowed to a stop, the engine humming softly. The air that drifted through my open window was thick with the unfamiliar scent of salt and humid earth, a world away from the diesel-and-concrete perfume of Quezon City.</p>
+                <p>"We're here, Thea," my dad announced from the driver's seat.</p>
+                <p>I stepped out of the car, my worn-out sneakers crunching on the gravel driveway. Before me stood our new house, a modest two-story place painted a pale, sun-bleached yellow. But it wasn't the house that held my attention. It was the sky—a vast, impossibly blue canvas stretching out to meet the shimmering line of the sea just beyond the trees.</p>
+                <p>San Isidro del Mar, Nueva Esperanza Province. A new town, a new home, a new life.</p>
+                <p>I was seventeen now. Taller, leaner, with the quiet confidence of someone who knew the exact weight of the barbells she could lift. I stretched my arms over my head, feeling the satisfying pull in my shoulders, the sea breeze a cool caress against my skin. It was a world away from the stuffy, four-walled cage where I had spent three years remaking myself. That room had been my chrysalis. This was supposed to be where I learned to fly.</p>
+                <p>My mom came to stand beside me, placing a hand on my shoulder. "Nervous about the new school?"</p>
+                <p>I shook my head, a small, genuine smile on my lips. "Not really. It's a fresh start."</p>
+                <p>Ten days. In ten days, Senior High would begin. No one here knew the old Thea. They would only ever know the girl standing before them now. A girl who was ready, for the first time in her life, to step out of the shadows and into the sun.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="main-footer">
+        <div class="divider"></div>
+        <div class="footer-links">
+            <a href="#">Next Chapter (Coming Soon)</a>
+            <a href="https://www.tiktok.com/@ranzu644" target="_blank">Follow Author</a>
+            <a href="mailto:ransuakuran@gmail.com">Contact</a>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.5;">&copy; 2024 Phantom Link. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hero = document.getElementById('hero');
+            const prologuePanel = document.getElementById('prologue-panel');
+            const prologueText = document.querySelectorAll('.prologue-text p');
+            const timelineTransition = document.getElementById('timeline-transition');
+            const timelineTrigger = document.querySelector('#prologue-end');
+            const dialogueLines = document.querySelectorAll('.dialogue');
+
+            // Parallax effect for the hero section
+            window.addEventListener('scroll', () => {
+                let scrollPosition = window.pageYOffset;
+                hero.style.backgroundPosition = `center ${scrollPosition * 0.5}px`;
+            });
+
+            // Intersection Observer for the prologue text fade-in
+            const textObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            prologueText.forEach(p => textObserver.observe(p));
+
+            // Typing animation for dialogue lines
+            function typeText(element) {
+                const fullText = element.textContent;
+                element.textContent = '';
+                let i = 0;
+                const typingInterval = setInterval(() => {
+                    element.textContent += fullText[i];
+                    i++;
+                    if (i === fullText.length) {
+                        clearInterval(typingInterval);
+                        element.classList.remove('typing-text');
+                    }
+                }, 50);
+            }
+
+            // Trigger typing animations with a delay
+            dialogueLines.forEach((line, index) => {
+                setTimeout(() => {
+                    line.classList.add('typing-text');
+                    typeText(line);
+                }, index * 2000); // Stagger the animations
+            });
+
+            // Intersection Observer for "Three Years Later" transition
+            const timelineObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        timelineTransition.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            timelineObserver.observe(timelineTrigger);
+        });
+    </script>
+</body>
+</html>
